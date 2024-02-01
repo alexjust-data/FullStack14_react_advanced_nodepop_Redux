@@ -1,25 +1,34 @@
+import { useDispatch } from 'react-redux';
+import { authLogin } from '../../../store/actions.js';
+
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { useAuth } from '../context';
 import { login } from '../service';
 import LoginForm from './LoginForm';
 import useMutation from '../../../hooks/useMutation';
 
+
+
 function LoginPage() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const { handleLogin } = useAuth();
   const { isLoading, error, execute, resetError } = useMutation(login);
+
+  const onLogin = () => { 
+    dispatch(authLogin());
+  };
 
   const handleSubmit = credentials => {
     execute(credentials)
-      .then(handleLogin)
       .then(() => {
+        onLogin(); // Actualiza el estado de autenticación en Redux
         const from = location.state?.from?.pathname || '/';
         navigate(from);
       });
   };
+  
 
   return (
     <div>
