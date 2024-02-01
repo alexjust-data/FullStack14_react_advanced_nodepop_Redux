@@ -1,13 +1,16 @@
 import { Link } from 'react-router-dom';
+
 import { ConfirmationButton } from '../../common';
 import { logout } from '../service';
 import useMutation from '../../../hooks/useMutation';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAuth } from '../context';
+
+import { useDispatch } from 'react-redux';
 import { authLogout } from '../../../store/actions';
 
 const AuthButton = () => {
   const dispatch = useDispatch();
-  const isLogged = useSelector(state => state.auth.isLogged);
+  const { isLogged, handleLogout } = useAuth();
   const mutation = useMutation(logout);
 
   const onLogout = () => {
@@ -16,6 +19,7 @@ const AuthButton = () => {
 
   const handleLogoutConfirm = async () => {
     await mutation.execute();
+    handleLogout();
     onLogout();
   };
 
@@ -32,4 +36,3 @@ const AuthButton = () => {
 };
 
 export default AuthButton;
-

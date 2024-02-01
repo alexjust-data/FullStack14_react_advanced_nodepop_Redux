@@ -5,7 +5,7 @@ import { configureClient } from './api/client';
 import storage from './utils/storage';
 import './index.css';
 import App from './components/app';
-import { AuthProvider } from './components/auth/context';
+import { AuthProvider  } from './components/auth/context';
 
 import configureStore from './store';
 import Root from './Root';
