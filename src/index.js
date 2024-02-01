@@ -1,6 +1,5 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-
 import { configureClient } from './api/client';
 import storage from './utils/storage';
 import './index.css';
@@ -10,10 +9,13 @@ import { AuthProvider  } from './components/auth/context';
 import configureStore from './store';
 import Root from './Root';
 
-
 const accessToken = storage.get('auth');
+
 configureClient({ accessToken });
+
 const store = configureStore({ auth: !!accessToken });
+
+console.log(store)
 
 const root = createRoot(document.getElementById('root'));
 root.render(
