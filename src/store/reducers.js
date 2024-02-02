@@ -1,4 +1,3 @@
-
 import {
     AUTH_LOGIN,
     AUTH_LOGOUT,
@@ -22,7 +21,7 @@ const initialState = {
 const initialAdvertsState = {
     list: [],
     detail: null,
-  };
+};
   
   
 export function auth(state = defaultState.auth, action) {
