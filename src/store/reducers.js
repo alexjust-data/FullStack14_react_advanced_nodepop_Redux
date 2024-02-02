@@ -63,10 +63,16 @@ export function adverts(state = initialAdvertsState, action) {
       return { ...state, list: action.payload };
     case ADVERT_LOADED:
       // Solo actualiza el detalle de un anuncio específico
-      return { ...state, detail: action.payload };
+      return { 
+        ...state, 
+        detail: action.payload 
+    };
     case ADVERTS_CREATED:
-      // agregar aquí nuevo anuncio a lista también si es necesario
-      return { ...state, list: [...state.list, action.payload], detail: action.payload };
+      return { 
+        ...state, 
+        list: [...state.list, action.payload], 
+        detail: action.payload 
+    };
     case ADVERT_DELETED:
       // Elimina anuncio de lista y limpia detalle si es el mismo que se ha borrado
       return {
