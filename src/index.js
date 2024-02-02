@@ -10,12 +10,13 @@ import configureStore from './store';
 import Root from './Root';
 
 const accessToken = storage.get('auth');
+console.log("accessToken:", accessToken) // nota
 
 configureClient({ accessToken });
 
-const store = configureStore({ auth: !!accessToken });
 
-console.log(store)
+const store = configureStore({ auth: { token: accessToken } });
+console.log("store:", store) // nota
 
 const root = createRoot(document.getElementById('root'));
 root.render(

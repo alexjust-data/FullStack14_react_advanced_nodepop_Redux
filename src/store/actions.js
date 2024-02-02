@@ -1,7 +1,8 @@
 import { AUTH_LOGIN, AUTH_LOGOUT, ADVERTS_LOADED } from './types';
 
-export const authLogin = () => ({
+export const authLogin = (token) => ({
   type: AUTH_LOGIN,
+  payload: token,
 });
 
 export const authLogout = () => ({
@@ -12,3 +13,4 @@ export const advertsLoaded = adverts => ({
   type: ADVERTS_LOADED,
   payload: adverts,    
 });
+
