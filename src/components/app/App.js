@@ -1,11 +1,35 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+
+// Importa tus acciones y funciones de API
+import { advertsLoaded, tagsLoaded } from '../../../src/store/actions';
+import { getAdverts, getTags } from '../../../src/components/adverts/service';
 
 import { AdvertPage, AdvertsPage, NewAdvertPage } from '../adverts';
 import { LoginPage, RequireAuth } from '../auth';
 import NotFoundPage from './NotFoundPage';
 import Layout from '../layout';
 
+
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // Cargar los adverts y tags cuando la aplicación se inicia
+    getAdverts().then(adverts => {
+      dispatch(advertsLoaded(adverts));
+    }).catch(error => {
+      console.error("Failed to load adverts", error);
+    });
+
+    getTags().then(tags => {
+      dispatch(tagsLoaded(tags));
+    }).catch(error => {
+      console.error("Failed to load tags", error);
+    });
+  }, [dispatch]);
+
   return (
     <Routes>
       <Route

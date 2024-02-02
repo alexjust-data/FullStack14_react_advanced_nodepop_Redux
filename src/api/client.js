@@ -36,4 +36,28 @@ export const resetClient = () => {
   removeAuthorizationHeader();
 };
 
+// Redux
+// ...código existente
+
+export const fetchTags = () => {
+  return client.get('/tags');
+};
+
+export const fetchAdverts = () => {
+  return client.get('/adverts');
+};
+
+export const fetchAdvertDetail = advertId => {
+  return client.get(`/adverts/${advertId}`);
+};
+
+export const createAdvert = advertData => {
+  return client.post('/adverts', advertData);
+};
+
+export const deleteAdvert = advertId => {
+  return client.delete(`/adverts/${advertId}`);
+};
+
+
 export default client;
