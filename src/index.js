@@ -5,7 +5,6 @@ import storage from './utils/storage';
 import './index.css';
 import App from './components/app';
 import { AuthProvider  } from './components/auth/context';
-import { PersistGate } from 'redux-persist/integration/react';
 
 import configureStore from './store';
 import Root from './Root';

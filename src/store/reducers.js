@@ -4,6 +4,7 @@ import {
     ADVERT_LOADED,
     ADVERTS_LOADED,
     ADVERTS_CREATED,
+    ADVERT_CREATED,
     ADVERT_DELETED,
     TAGS_LOADED,
 } from './types';
@@ -66,6 +67,13 @@ export function adverts(state = initialAdvertsState, action) {
       return { 
         ...state, 
         detail: action.payload 
+    };
+    case ADVERT_CREATED:
+      return {
+        ...state,
+        list: [...state.list, action.payload],
+        isLoading: false,
+        error: null,
     };
     case ADVERTS_CREATED:
       return { 
