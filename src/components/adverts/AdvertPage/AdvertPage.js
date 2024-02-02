@@ -1,35 +1,45 @@
-import { useCallback } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
+import { advertLoaded, advertDeleted } from '../../../store/actions';
+import { getAdvert, deleteAdvert } from '../service';
 
 import AdvertDetail from './AdvertDetail';
-import { getAdvert, deleteAdvert } from '../service';
-import useQuery from '../../../hooks/useQuery';
-import useMutation from '../../../hooks/useMutation';
 
 function AdvertPage() {
   const { advertId } = useParams();
   const navigate = useNavigate();
-  const getAdvertById = useCallback(() => getAdvert(advertId), [advertId]);
-  const { isLoading, data: advert } = useQuery(getAdvertById);
-  const mutation = useMutation(deleteAdvert);
+  const dispatch = useDispatch();
+  const advert = useSelector(state => state.adverts.detail);
+  const isLoading = useSelector(state => state.adverts.isLoading);
+
+  useEffect(() => {
+    if (!advert || advert.id !== advertId) {
+      getAdvert(advertId).then(advert => {
+        dispatch(advertLoaded(advert));
+      });
+    }
+  }, [dispatch, advert, advertId]);
 
   const handleDelete = () => {
-    mutation.execute(advertId).then(() => navigate('/'));
+    deleteAdvert(advertId).then(() => {
+      dispatch(advertDeleted(advertId));
+      navigate('/');
+    });
   };
 
-  if (isLoading) {
+  if (isLoading || !advert) {
     return 'Loading...';
   }
 
   return (
-    advert && (
-      <AdvertDetail
-        onDelete={handleDelete}
-        isLoading={mutation.isLoading}
-        {...advert}
-      />
-    )
+    <AdvertDetail
+      onDelete={handleDelete}
+      isLoading={isLoading}
+      {...advert}
+    />
   );
 }
 
 export default AdvertPage;
+
