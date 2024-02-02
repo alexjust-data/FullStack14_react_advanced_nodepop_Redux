@@ -5,12 +5,12 @@ import storage from './utils/storage';
 import './index.css';
 import App from './components/app';
 import { AuthProvider  } from './components/auth/context';
-import { PersistGate } from 'redux-persist/integration/react';
 
 import configureStore from './store';
 import Root from './Root';
 
 const accessToken = storage.get('auth');
+
 console.log("accessToken:", accessToken) // nota
 
 configureClient({ accessToken });
@@ -29,5 +29,3 @@ root.render(
     </Root>
   </React.StrictMode>,
 );
-
-

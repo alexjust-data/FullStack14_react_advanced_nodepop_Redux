@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect } from 'react';
 
 // Importa tus acciones y funciones de API
@@ -14,21 +14,24 @@ import Layout from '../layout';
 
 function App() {
   const dispatch = useDispatch();
+  const accessToken = useSelector(state => state.session.token);
 
   useEffect(() => {
-    // Cargar los adverts y tags cuando la aplicación se inicia
-    getAdverts().then(adverts => {
-      dispatch(advertsLoaded(adverts));
-    }).catch(error => {
-      console.error("Failed to load adverts", error);
-    });
+    if (accessToken) {
+      // Cargar los adverts y tags solo si el usuario está autenticado
+      getAdverts().then(adverts => {
+        dispatch(advertsLoaded(adverts));
+      }).catch(error => {
+        console.error("Failed to load adverts", error);
+      });
 
-    getTags().then(tags => {
-      dispatch(tagsLoaded(tags));
-    }).catch(error => {
-      console.error("Failed to load tags", error);
-    });
-  }, [dispatch]);
+      getTags().then(tags => {
+        dispatch(tagsLoaded(tags));
+      }).catch(error => {
+        console.error("Failed to load tags", error);
+      });
+    }
+  }, [dispatch, accessToken]);
 
   return (
     <Routes>
