@@ -1,3 +1,4 @@
+import { combineReducers } from 'redux';
 import {
     AUTH_LOGIN,
     AUTH_LOGOUT,
@@ -8,87 +9,81 @@ import {
     ADVERT_DELETED,
     TAGS_LOADED,
 } from './types';
-  
-const defaultState = {
-    auth: false,
-    adverts: [] 
-};
 
-const initialState = {
-    token: null,
-};
+const defaultState = { auth: false, adverts: [] };
+const initialState = { token: null };
+const initialAdvertsState = { list: [], detail: null };
 
-// La estructura del estado inicial para los anuncios
-const initialAdvertsState = {
-    list: [],
-    detail: null,
-};
-  
-export function auth(state = defaultState.auth, action) {
+// Auth reducer
+function auth(state = defaultState.auth, action) {
     switch (action.type) {
         case AUTH_LOGIN:
-          return true;
+            return true;
         case AUTH_LOGOUT:
-          return false;
+            return false;
         default:
-        return state;
+            return state;
     }
 }
 
-export function session(state = initialState, action) {
+// Session reducer
+function session(state = initialState, action) {
     switch (action.type) {
         case AUTH_LOGIN:
-        return { ...state, token: action.payload };
+            return { ...state, token: action.payload };
         case AUTH_LOGOUT:
-        return { ...state, token: null };
+            return { ...state, token: null };
         default:
-        return state;
+            return state;
     }
 }
 
-export function tags(state = [], action) {
+// Tags reducer
+function tags(state = [], action) {
     switch (action.type) {
-      case TAGS_LOADED:
-        return action.payload;
-      default:
-        return state;
+        case TAGS_LOADED:
+            return action.payload;
+        default:
+            return state;
     }
 }
 
-
-// El reducer para manejar los estados de los anuncios
-export function adverts(state = initialAdvertsState, action) {
-  switch (action.type) {
-    case ADVERTS_LOADED:
-      return { ...state, list: action.payload };
-    case ADVERT_LOADED:
-      // Solo actualiza el detalle de un anuncio específico
-      return { 
-        ...state, 
-        detail: action.payload 
-    };
-    case ADVERT_CREATED:
-      return {
-        ...state,
-        list: [...state.list, action.payload],
-        isLoading: false,
-        error: null,
-    };
-    case ADVERTS_CREATED:
-      return { 
-        ...state, 
-        list: [...state.list, action.payload], 
-        detail: action.payload 
-    };
-    case ADVERT_DELETED:
-      // Elimina anuncio de lista y limpia detalle si es el mismo que se ha borrado
-      return {
-        ...state,
-        list: state.list.filter(advert => advert.id !== action.payload),
-        detail: state.detail && state.detail.id === action.payload ? null : state.detail,
-      };
-    // ...otros casos
-    default:
-      return state;
-  }
+// Adverts reducer
+function adverts(state = initialAdvertsState, action) {
+    switch (action.type) {
+        case ADVERTS_LOADED:
+            return { ...state, list: action.payload };
+        case ADVERT_LOADED:
+            return { ...state, detail: action.payload };
+        case ADVERT_CREATED:
+            return {
+                ...state,
+                list: [...state.list, action.payload],
+            };
+        case ADVERTS_CREATED:
+            return { 
+                ...state, 
+                list: [...state.list, action.payload], 
+                detail: action.payload 
+            };
+        case ADVERT_DELETED:
+            return {
+                ...state,
+                list: state.list.filter(advert => advert.id !== action.payload),
+                detail: state.detail && state.detail.id === action.payload ? null : state.detail,
+            };
+        default:
+            return state;
+    }
 }
+
+// Combina todos los reducers en un rootReducer
+const rootReducer = combineReducers({
+    auth,
+    session,
+    tags,
+    adverts,
+    // Aquí puedes añadir más reducers si fuera necesario
+});
+
+export default rootReducer;

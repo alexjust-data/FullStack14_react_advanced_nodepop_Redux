@@ -1,19 +1,17 @@
-
-
 import React, { useEffect } from 'react';
-import { getTags } from '../service';
+import { getTags as getTagsService } from '../service'; // Renamed the service import
 import { CheckboxGroup } from '../../common';
 import { useDispatch, useSelector } from 'react-redux';
 import { tagsLoaded } from '../../../../src/store/actions';
-
+import { getTags } from '../../../store/selectors'; // Keep the selector name as it is
 
 function SelectTags(props) {
   const dispatch = useDispatch();
-  const tags = useSelector(state => state.tags);
+  const tags = useSelector(getTags);
 
   useEffect(() => {
     if (tags.length === 0) {
-      getTags().then(tags => {
+      getTagsService().then(tags => { // Use the renamed service function
         dispatch(tagsLoaded(tags));
       }).catch(error => {
         console.error("Failed to load tags", error);
@@ -25,4 +23,5 @@ function SelectTags(props) {
 }
 
 export default SelectTags;
+
 

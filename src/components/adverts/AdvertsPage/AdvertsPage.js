@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { advertsLoaded } from '../../../store/actions';
 import { getAdverts } from '../service';
+import { getAdvertsList, getAdvertsLoading } from '../../../store/selectors';
 
 import FiltersForm from './FiltersForm';
 import AdvertsList from './AdvertsList';
@@ -14,8 +15,8 @@ const saveFilters = filters => storage.set('filters', filters);
 
 function AdvertsPage() {
   const dispatch = useDispatch();
-  const adverts = useSelector(state => state.adverts.list); // Estado de Redux
-  const isLoading = useSelector(state => state.adverts.isLoading); // Estado de Redux para la carga
+  const adverts = useSelector(getAdvertsList); // Estado de Redux
+  const isLoading = useSelector(getAdvertsLoading); // Estado de Redux para la carga
   const [filters, setFilters] = useState(getFilters);
 
   useEffect(() => {

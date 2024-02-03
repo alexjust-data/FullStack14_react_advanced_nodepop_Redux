@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { advertLoaded, advertDeleted } from '../../../store/actions';
 import { getAdvert, deleteAdvert } from '../service';
+import { getAdvertDetail } from '../../../store/selectors';
 
 import AdvertDetail from './AdvertDetail';
 
@@ -10,7 +11,7 @@ function AdvertPage() {
   const { advertId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const advert = useSelector(state => state.adverts.detail);
+  const advert = useSelector(getAdvertDetail);
   const isLoading = useSelector(state => state.adverts.isLoading);
 
   useEffect(() => {

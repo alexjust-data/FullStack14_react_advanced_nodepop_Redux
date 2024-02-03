@@ -7,14 +7,29 @@ import { AUTH_LOGIN,
          ADVERT_DELETED, 
         } from './types';
 
-export const authLogin = (token) => ({
-  type: AUTH_LOGIN,
-  payload: token,
-});
+// export const authLogin = (token) => ({
+//   type: AUTH_LOGIN,
+//   payload: token,
+// });
 
-export const authLogout = () => ({
-  type: AUTH_LOGOUT,
-});
+export const authLogin = (token) => {
+  console.log("Despachando acción AUTH_LOGIN con token:", token);
+  return {
+    type: AUTH_LOGIN,
+    payload: token,
+  };
+};
+
+// export const authLogout = () => ({
+//   type: AUTH_LOGOUT,
+// });
+
+export const authLogout = () => {
+  console.log("Despachando acción AUTH_LOGOUT");
+  return {
+    type: AUTH_LOGOUT,
+  };
+};
 
 // adverds
 export const advertsLoaded = adverts => ({

@@ -9,6 +9,7 @@ import useMutation from '../../../hooks/useMutation';
 import { useDispatch } from 'react-redux';
 import { authLogin } from '../../../store/actions';
 
+
 function LoginPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ function LoginPage() {
   const handleSubmit = credentials => {
     execute(credentials)
       .then(accessToken => {
+        console.log("Token recibido después del login:", accessToken);
         dispatch(authLogin(accessToken)); // Pasar el token a la acción
         handleLogin();
       })

@@ -10,15 +10,18 @@ import { AdvertPage, AdvertsPage, NewAdvertPage } from '../adverts';
 import { LoginPage, RequireAuth } from '../auth';
 import NotFoundPage from './NotFoundPage';
 import Layout from '../layout';
-
+import { getSessionToken } from '../../store/selectors';
+import { configureClient } from '../../api/client';
 
 function App() {
   const dispatch = useDispatch();
-  const accessToken = useSelector(state => state.session.token);
+  const accessToken = useSelector(getSessionToken);
 
 
   useEffect(() => {
+    console.log("Token de acceso en App useEffect:", accessToken);
     if (accessToken) {
+      configureClient({ accessToken });
       // Cargar los adverts y tags solo si el usuario está autenticado
       getAdverts().then(adverts => {
         dispatch(advertsLoaded(adverts));
