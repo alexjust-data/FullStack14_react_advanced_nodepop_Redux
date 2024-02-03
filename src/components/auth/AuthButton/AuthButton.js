@@ -1,17 +1,23 @@
-import { Link } from 'react-router-dom';
-
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { ConfirmationButton } from '../../common';
 import { logout } from '../service';
-import useMutation from '../../../hooks/useMutation';
-import { useAuth } from '../context';
+import { useDispatch, useSelector } from 'react-redux';
+import { authLogout } from '../../../store/actions';
 
 const AuthButton = () => {
-  const { isLogged, handleLogout } = useAuth();
-  const mutation = useMutation(logout);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const isLogged = useSelector(state => state.auth); 
 
   const handleLogoutConfirm = async () => {
-    await mutation.execute();
-    handleLogout();
+    try {
+      await logout(); 
+      dispatch(authLogout());
+      navigate('/login');
+    } catch (error) {
+      console.error('Logout failed', error);
+    }
   };
 
   return isLogged ? (

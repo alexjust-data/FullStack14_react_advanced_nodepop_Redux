@@ -24,7 +24,6 @@ const initialAdvertsState = {
     detail: null,
 };
   
-  
 export function auth(state = defaultState.auth, action) {
     switch (action.type) {
         case AUTH_LOGIN:
