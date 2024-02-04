@@ -11,7 +11,6 @@ export const login = ({ remember, ...credentials }) => {
       configureClient({ accessToken });
       if (remember) {
         storage.set('auth', accessToken);
-        console.log('Token guardado en localStorage:', accessToken);
       }
       return accessToken;
     });

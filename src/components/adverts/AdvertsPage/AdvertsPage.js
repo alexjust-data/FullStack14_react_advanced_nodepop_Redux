@@ -15,8 +15,8 @@ const saveFilters = filters => storage.set('filters', filters);
 
 function AdvertsPage() {
   const dispatch = useDispatch();
-  const adverts = useSelector(getAdvertsList); // Estado de Redux
-  const isLoading = useSelector(getAdvertsLoading); // Estado de Redux para la carga
+  const adverts = useSelector(getAdvertsList); 
+  const isLoading = useSelector(getAdvertsLoading); 
   const [filters, setFilters] = useState(getFilters);
 
   useEffect(() => {

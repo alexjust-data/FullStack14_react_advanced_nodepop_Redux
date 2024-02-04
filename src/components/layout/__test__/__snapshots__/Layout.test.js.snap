@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layout should match snapshot 1`] = `
+<DocumentFragment>
+  <header>
+    Nodepop React
+    <nav>
+      <ul>
+        <li>
+          <a
+            class=""
+            href="/adverts"
+          >
+            Nodepop
+          </a>
+        </li>
+        <li>
+          <a
+            class=""
+            href="/adverts/new"
+          >
+            New advert
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <a
+      href="/login"
+    >
+      Login
+    </a>
+  </header>
+  <main />
+  <footer>
+    @Keepcoding 2021
+  </footer>
+</DocumentFragment>
+`;

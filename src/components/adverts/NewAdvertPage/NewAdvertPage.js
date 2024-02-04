@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { advertCreated } from '../../../store/actions'; // Importa la acción de Redux
+import { advertCreated } from '../../../store/actions'; 
 import { createAdvert } from '../service';
 import NewAdvertForm from './NewAdvertForm';
 
@@ -17,12 +17,10 @@ function NewAdvertPage() {
       navigate(`/adverts/${advert.id}`);
     }).catch(error => {
       console.error('Failed to create advert', error);
-      // Aquí puedes manejar el error, por ejemplo, mostrando un mensaje al usuario
     });
   };
 
-  // isLoading podría ser parte del estado de Redux si quieres reflejar el estado de la carga allí
-  const isLoading = false; // Deberías obtener este valor del estado de Redux si es necesario
+  const isLoading = false; 
 
   return <NewAdvertForm onSubmit={handleSubmit} isLoading={isLoading} />;
 }

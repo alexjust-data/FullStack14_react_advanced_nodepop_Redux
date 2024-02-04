@@ -22,7 +22,6 @@ function LoginPage() {
   const handleSubmit = credentials => {
     execute(credentials)
       .then(accessToken => {
-        console.log("Token recibido después del login:", accessToken);
         dispatch(authLogin(accessToken)); // Pasar el token a la acción
         handleLogin();
       })

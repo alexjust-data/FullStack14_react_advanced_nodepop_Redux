@@ -83,7 +83,6 @@ const rootReducer = combineReducers({
     session,
     tags,
     adverts,
-    // Aquí puedes añadir más reducers si fuera necesario
 });
 
 export default rootReducer;

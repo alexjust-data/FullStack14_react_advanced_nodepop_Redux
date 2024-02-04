@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import { getTags as getTagsService } from '../service'; // Renamed the service import
+import { getTags as getTagsService } from '../service';
 import { CheckboxGroup } from '../../common';
 import { useDispatch, useSelector } from 'react-redux';
 import { tagsLoaded } from '../../../../src/store/actions';
-import { getTags } from '../../../store/selectors'; // Keep the selector name as it is
+import { getTags } from '../../../store/selectors';
 
 function SelectTags(props) {
   const dispatch = useDispatch();

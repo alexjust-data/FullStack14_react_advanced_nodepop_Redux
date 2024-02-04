@@ -1,15 +1,4 @@
-// import { Provider } from 'react-redux';
-// import { BrowserRouter } from 'react-router-dom';
 
-// export default function Root({ store, children }) {
-//   return (
-//     <Provider store={store}>
-//       <BrowserRouter>{children}</BrowserRouter>
-//     </Provider>
-//   );
-// }
-
-// src/Root.js
 
 import React from 'react';
 import { Provider } from 'react-redux';

@@ -2,7 +2,6 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect } from 'react';
 
-// Importa tus acciones y funciones de API
 import { advertsLoaded, tagsLoaded } from '../../../src/store/actions';
 import { getAdverts, getTags } from '../../../src/components/adverts/service';
 
